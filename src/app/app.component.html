@@ -4,5 +4,19 @@
     <div class="list-container">
       <app-todo-list></app-todo-list>
     </div>
+    <div class="todo-container">
+      <app-todo></app-todo>
+    </div>
+
+    <button
+      mat-fab
+      color="primary"
+      (click)="openDialog()"
+      class="new-todo-btn"
+      matTooltip="Add New Todo"
+      matTooltipClass="tooltip"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
   </main>
 </div>

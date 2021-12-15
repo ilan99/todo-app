@@ -9,7 +9,8 @@ import { TodoService } from '../../services/todo.service';
   styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent implements OnInit, OnDestroy {
-  public _todos: Array<Itodo> = [];
+  public todos: Array<Itodo> = [];
+  private _prevIndex = 0;
 
   private subscription: Subscription = new Subscription();
 
@@ -17,11 +18,18 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.todoService.getTodos().subscribe((data) => (this._todos = [...data]))
+      this.todoService.getTodos().subscribe((data) => (this.todos = [...data]))
     );
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public onTodoClick(todo: Itodo, index: number): void {
+    this.todoService.setSingleTodo(todo);
+    this.todos[this._prevIndex].selected = false;
+    this.todos[index].selected = true;
+    this._prevIndex = index;
   }
 }

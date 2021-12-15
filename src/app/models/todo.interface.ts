@@ -1,7 +1,9 @@
 export interface Itodo {
-  title: String;
-  description: String;
+  id: number;
+  title: string;
+  description: string;
   isCompleted: boolean;
   isArchived: boolean;
-  endDate: Date | Number;
+  endDate: Date | number;
+  selected: boolean;
 }

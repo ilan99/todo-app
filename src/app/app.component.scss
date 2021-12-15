@@ -1,10 +1,27 @@
+::ng-deep .tooltip {
+  background-color: white;
+  color: black !important;
+  border: 1px solid black;
+}
+
 .app {
   main {
     padding: 10px;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 84px);
+    display: flex;
+    gap: 10px;
 
     .list-container {
       width: 25%;
+    }
+    .todo-container {
+      width: 75%;
+    }
+
+    .new-todo-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
     }
   }
 }
