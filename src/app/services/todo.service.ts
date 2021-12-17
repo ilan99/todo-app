@@ -6,12 +6,12 @@ import { Itodo } from '../models/todo.interface';
   providedIn: 'root',
 })
 export class TodoService {
-  private _todos: Array<Itodo> = [
+  private _todos: Itodo[] = [
     {
       id: 1,
       title: 'Java course',
       description: 'Code with Mosh',
-      isCompleted: true,
+      isCompleted: false,
       isArchived: false,
       endDate: new Date('2021-11-05'),
       selected: true,
@@ -27,18 +27,20 @@ export class TodoService {
     },
   ];
 
-  private behaviorSubject: BehaviorSubject<Array<Itodo>> = new BehaviorSubject(
+  private _id = this._todos.length ? this._todos[this._todos.length - 1].id : 0;
+
+  private listTodoSubject: BehaviorSubject<Array<Itodo>> = new BehaviorSubject(
     this._todos
   );
 
-  private singleTodoSubject: BehaviorSubject<Itodo> = new BehaviorSubject(
-    this._todos[0]
+  private singleTodoSubject: BehaviorSubject<Itodo | any> = new BehaviorSubject(
+    this._todos.length ? this._todos[0] : null
   );
 
   constructor() {}
 
   public getTodos(): Observable<Array<Itodo>> {
-    return this.behaviorSubject.asObservable();
+    return this.listTodoSubject.asObservable();
   }
 
   public getSingleTodo(): Observable<Itodo> {
@@ -47,5 +49,20 @@ export class TodoService {
 
   public setSingleTodo(todo: Itodo): void {
     this.singleTodoSubject.next(todo);
+  }
+
+  public addNewTodo(data: any): void {
+    const todo: Itodo = {
+      id: ++this._id,
+      title: data.title,
+      description: data.description,
+      isCompleted: false,
+      isArchived: false,
+      endDate: data.endDate,
+      selected: false,
+    };
+
+    this._todos.push(todo);
+    this.listTodoSubject.next(this._todos);
   }
 }

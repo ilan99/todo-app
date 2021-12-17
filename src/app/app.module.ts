@@ -9,13 +9,23 @@ import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { NewTodoComponent } from './components/new-todo/new-todo.component';
+import { TodoContainerComponent } from './todo-container/todo-container.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, TodoListComponent, HeaderComponent, TodoComponent, NewTodoComponent],
+  declarations: [
+    AppComponent,
+    TodoListComponent,
+    HeaderComponent,
+    TodoComponent,
+    NewTodoComponent,
+    TodoContainerComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     MaterialModule,
   ],
   providers: [],
